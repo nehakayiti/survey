@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-import EnterTitle from './enter_title';
 
 //Style of words
 var wordStyle = {
@@ -9,26 +8,26 @@ var wordStyle = {
 
 class AddQuestion extends Component{
 
-  constructor(props){
+  constructor(props) {
     super(props);
-
     this.state = {
       title: "",
       question: "",
-      answers: ""
+      answer1: "",
+      answer2: "",
+      answer3: "",
+      answer4: "",
     }
-
-    this.onChange = this.onChange.bind(this);
-  }
-
-  onChange(event){
-    const val = event.target.value;
-    this.setState({question: val});
   }
 
   handleSubmit(e){
     e.preventDefault();
-    console.log("clicked submit button");
+    this.state.title = this.refs.title.value;
+    this.state.question = this.refs.question.value;
+    this.state.answer1 = this.refs.answer1.value;
+    this.state.answer2 = this.refs.answer2.value;
+    this.state.answer3 = this.refs.answer3.value;
+    this.state.answer4 = this.refs.answer4.value;
     console.log(this.state);
   }
 
@@ -36,46 +35,44 @@ class AddQuestion extends Component{
   render(){
     return(
       <form>
-      <div>
-        <EnterTitle />
-        <br/>
-        <hr/>
-        <br/>
-        <h5 style={wordStyle}>Add question:</h5>
-        <input  id="question"
-                type="text"
-                value={this.state.question}
-                onChange={this.onChange}
-                className="validate white">
-        </input>
-        <br/>
-        <hr/>
-        <br/>
-        <h5 style={wordStyle}>Enter answer choice:</h5>
-        <ul className="">
-          <li><input id="answer" type="text" className="validate white"></input></li>
-          <li><input id="answer" type="text" className="validate white"></input></li>
-          <li><input id="answer" type="text" className="validate white"></input></li>
-          <li><input id="answer" type="text" className="validate white"></input></li>
-          <br/>
-          <a className="waves-effect waves-light btn grey">Add another answer</a>
-          <br/>
+        <div>
+          <h5 style={wordStyle}>Enter Survey Title:</h5>
+          <input id="title" className="white" ref="title"></input>
           <br/>
           <hr/>
           <br/>
-          <a className="waves-effect waves-light btn grey">Add another question</a>
+          <h5 style={wordStyle}>Add question:</h5>
+          <input id="question" type="text" className="validate white" ref="question"></input>
           <br/>
+          <hr/>
           <br/>
-          <button type="submit" onClick={this.handleSubmit.bind(this)} className="btn btn-primary">Submit</button>
-          <br/>
-          <br/>
-          <Link
-            to="/sendSurvey"
-            className="waves-effect waves-light btn grey">
-            Continue
-          </Link>
-        </ul>
-      </div>
+          <h5 style={wordStyle}>Enter answer choice:</h5>
+          <ul className="">
+            <li><input id="answer" type="text" className="validate white" ref="answer1"></input></li>
+            <li><input id="answer" type="text" className="validate white" ref="answer2"></input></li>
+            <li><input id="answer" type="text" className="validate white" ref="answer3"></input></li>
+            <li><input id="answer" type="text" className="validate white" ref="answer4"></input></li>
+            <br/>
+            {/*
+            <a className="waves-effect waves-light btn grey">Add another answer</a>
+            <br/>
+            <br/>
+            <hr/>
+            <br/>
+            <a className="waves-effect waves-light btn grey">Add another question</a>
+            <br/>
+            */}
+            <br/>
+            <button type="submit" onClick={this.handleSubmit.bind(this)} className="btn btn-primary">Submit</button>
+            <br/>
+            <br/>
+            <Link
+              to="/sendSurvey"
+              className="waves-effect waves-light btn grey">
+              Continue
+            </Link>
+          </ul>
+        </div>
       </form>
   	);
   }
