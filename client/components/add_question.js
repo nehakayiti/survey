@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
+import Firebase from 'firebase';
 
 //Style of words
 var wordStyle = {
@@ -29,6 +30,12 @@ class AddQuestion extends Component{
     this.state.answer3 = this.refs.answer3.value;
     this.state.answer4 = this.refs.answer4.value;
     console.log(this.state);
+    firebase.database().ref('surveys/' + this.state.title + '/' + this.state.question).push({
+        answer1: this.state.answer1,
+        answer2: this.state.answer2,
+        answer3: this.state.answer3,
+        answer4: this.state.answer4,
+  });
   }
 
 
@@ -76,7 +83,24 @@ class AddQuestion extends Component{
       </form>
   	);
   }
-
+  /*
+    User1
+      Survey
+        question
+          answer1
+          answer2
+        question
+          answer1
+          answer2
+    user2
+      Survey
+        question
+          answer1
+          answer2
+        question
+          answer1
+          answer2
+  */
 }
 
 export default AddQuestion;
